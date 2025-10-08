@@ -69,16 +69,21 @@ public class ProductoController {
 
     // 6. POST /productos/{id}/ajustar – ajuste de inventario
     @PostMapping("/{id}/ajustar")
-    public ResponseEntity<Producto> ajustarInventario(@PathVariable Long id, @RequestBody Map<String, Integer> ajuste) {
+    public ResponseEntity<?> ajustarInventario(@PathVariable Long id, @RequestBody Map<String, Object> ajuste) {
         try {
-            Integer cantidad = ajuste.get("cantidad");
-            if (cantidad == null) {
-                return ResponseEntity.badRequest().build(); // Error si no se envía la cantidad
+            Integer cantidad = (Integer) ajuste.get("cantidad");
+            String razon = (String) ajuste.get("razon"); // <-- Obtenemos la razón
+
+            if (cantidad == null || razon == null || razon.isBlank()) {
+                return ResponseEntity.badRequest().body("La petición debe incluir 'cantidad' y 'razon'.");
             }
-            Producto producto = productoService.ajustarInventario(id, cantidad);
+
+            Producto producto = productoService.ajustarInventario(id, cantidad, razon);
             return ResponseEntity.ok(producto);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 }

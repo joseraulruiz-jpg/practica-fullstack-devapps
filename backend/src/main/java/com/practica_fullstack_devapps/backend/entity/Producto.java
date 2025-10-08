@@ -26,4 +26,6 @@ public class Producto {
     private Integer existencias;
 
     private boolean activo;
+
+    private String ultimaRazonAjuste;
 }

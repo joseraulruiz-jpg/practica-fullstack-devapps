@@ -68,7 +68,7 @@ public class ProductoService {
 
     // Nuevo método para ajustar el inventario
     @Transactional
-    public Producto ajustarInventario(Long id, int cantidad) {
+    public Producto ajustarInventario(Long id, int cantidad, String razon) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con el id: " + id));
 
@@ -77,6 +77,8 @@ public class ProductoService {
             throw new IllegalArgumentException("No se puede ajustar el inventario a un valor negativo.");
         }
         producto.setExistencias(nuevasExistencias);
+        producto.setUltimaRazonAjuste(razon);
+
         return productoRepository.save(producto);
     }
 
@@ -88,4 +90,21 @@ public class ProductoService {
             throw new IllegalArgumentException("Las existencias del producto no pueden ser negativas.");
         }
     }
+
+    /*
+    @Transactional
+    public Producto ajustarInventario(Long id, int cantidad, String razon) { // <--- Añadir String razon
+        System.out.println("Ajustando inventario para producto ID " + id + ". Cantidad: " + cantidad + ", Razón: " + razon);
+
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con el id: " + id));
+
+        int nuevasExistencias = producto.getExistencias() + cantidad;
+        if (nuevasExistencias < 0) {
+            throw new IllegalArgumentException("No se puede ajustar el inventario a un valor negativo.");
+        }
+        producto.setExistencias(nuevasExistencias);
+        return productoRepository.save(producto);
+    }
+    */
 }
