@@ -1,0 +1,67 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212; /* Fondo principal oscuro */
+}
+
+.login-card {
+    padding: 2rem;
+    background: #1e1e1e; /* Color de la tarjeta ligeramente más claro */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    color: #e0e0e0; /* Color de texto claro */
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #c0c0c0; /* Color de texto para etiquetas */
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #555; /* Borde más oscuro */
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #333; /* Fondo de input oscuro */
+    color: #fff; /* Texto del input blanco */
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
