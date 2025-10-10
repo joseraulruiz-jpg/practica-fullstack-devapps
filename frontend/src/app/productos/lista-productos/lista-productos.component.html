@@ -1,5 +1,8 @@
 <div class="container">
   <h1>Lista de Productos</h1>
+
+  <a routerLink="/productos/nuevo" class="btn-nuevo">Nuevo Producto</a>
+
   <table>
     <thead>
       <tr>
@@ -9,7 +12,8 @@
         <th>Precio</th>
         <th>Existencias</th>
         <th>Activo</th>
-        <th>Última Razón de Ajuste</th> </tr>
+        <th>Última Razón</th>
+        <th>Acciones</th> </tr>
     </thead>
     <tbody>
       <tr *ngFor="let producto of productos">
@@ -20,6 +24,9 @@
         <td>{{ producto.existencias }}</td>
         <td>{{ producto.activo ? 'Sí' : 'No' }}</td>
         <td>{{ producto.ultimaRazonAjuste || 'N/A' }}</td>
+        <td>
+          <a [routerLink]="['/productos/editar', producto.id]" class="btn-editar">Editar</a>
+        </td>
       </tr>
     </tbody>
   </table>

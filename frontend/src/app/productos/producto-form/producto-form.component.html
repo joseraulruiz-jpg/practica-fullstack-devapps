@@ -1,0 +1,38 @@
+<div class="form-container">
+  <h2>{{ editMode ? 'Editar Producto' : 'Crear Nuevo Producto' }}</h2>
+  <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" formControlName="nombre" placeholder="Ej: Teclado Mecánico">
+    </div>
+
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input id="marca" formControlName="marca" placeholder="Ej: Logitech">
+    </div>
+
+     <div class="form-group">
+      <label for="categoria">Categoría</label>
+      <input id="categoria" formControlName="categoria" placeholder="Ej: Periféricos">
+    </div>
+
+    <div class="form-group">
+      <label for="precio">Precio</label>
+      <input id="precio" type="number" formControlName="precio" placeholder="0.00">
+    </div>
+
+    <div class="form-group">
+      <label for="existencias">Existencias</label>
+      <input id="existencias" type="number" formControlName="existencias" placeholder="0">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="!productoForm.valid">
+        {{ editMode ? 'Actualizar Producto' : 'Guardar Producto' }}
+      </button>
+      
+      <a routerLink="/productos" class="btn-cancelar">Cancelar</a>
+    </div>
+    </form>
+</div>

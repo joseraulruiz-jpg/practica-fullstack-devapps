@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Creamos una interfaz para describir la respuesta de la API
 export interface ApiResponse {
   content: any[];
 }
@@ -15,8 +14,21 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
-  // El método ahora devuelve un Observable de nuestra nueva interfaz
   getProductos(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.apiUrl);
+  }
+
+  // --- MÉTODOS PARA EL FORMULARIO ---
+
+  getProductoById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  crearProducto(producto: any): Observable<any> {
+    return this.http.post(this.apiUrl, producto);
+  }
+
+  actualizarProducto(id: number, producto: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, producto);
   }
 }
