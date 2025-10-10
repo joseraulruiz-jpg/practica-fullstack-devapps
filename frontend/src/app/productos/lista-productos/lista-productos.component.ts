@@ -18,4 +18,15 @@ export class ListaProductosComponent implements OnInit {
       this.productos = data.content; // Asigna los datos recibidos a nuestro array
     });
   }
+
+  onToggleActivo(id: number): void {
+    this.productoService.toggleActivo(id).subscribe(productoActualizado => {
+      // Buscamos el índice del producto en nuestro array local
+      const index = this.productos.findIndex(p => p.id === id);
+      if (index !== -1) {
+        // Actualizamos el producto en el array local para que la vista se refresque al instante
+        this.productos[index] = productoActualizado;
+      }
+    });
+  }
 }

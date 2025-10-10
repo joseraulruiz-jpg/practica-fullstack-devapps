@@ -25,8 +25,10 @@
         <td>{{ producto.precio | currency:'MXN' }}</td>
         <td>{{ producto.existencias }}</td>
         <td>
-          <i *ngIf="producto.activo" class="fas fa-check" style="color: limegreen;" title="Activo"></i>
-          <i *ngIf="!producto.activo" class="fas fa-xmark" style="color: red;" title="Inactivo"></i>
+          <button class="btn-icon" (click)="onToggleActivo(producto.id)">
+            <i *ngIf="producto.activo" class="fas fa-check" style="color: limegreen;" title="Desactivar"></i>
+            <i *ngIf="!producto.activo" class="fas fa-xmark" style="color: red;" title="Activar"></i>
+          </button>
         </td>
         <td>{{ producto.ultimaRazonAjuste || 'N/A' }}</td>
         <td>

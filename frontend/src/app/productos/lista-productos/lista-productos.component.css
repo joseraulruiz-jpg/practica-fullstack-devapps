@@ -1,0 +1,8 @@
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1.2em; /* Opcional: hace el icono un poco más grande */
+  line-height: 1;
+}
