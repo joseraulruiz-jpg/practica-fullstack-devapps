@@ -1,1 +1,26 @@
-<p>lista-productos works!</p>
+<div class="container">
+  <h1>Lista de Productos</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>Existencias</th>
+        <th>Activo</th>
+        <th>Última Razón de Ajuste</th> </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.marca }}</td>
+        <td>{{ producto.precio | currency:'MXN' }}</td>
+        <td>{{ producto.existencias }}</td>
+        <td>{{ producto.activo ? 'Sí' : 'No' }}</td>
+        <td>{{ producto.ultimaRazonAjuste || 'N/A' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
