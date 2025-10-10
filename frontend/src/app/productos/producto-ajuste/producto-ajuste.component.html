@@ -1,0 +1,22 @@
+<div class="form-container" *ngIf="producto">
+  <h2>Ajustar Inventario</h2>
+  <div class="product-info">
+    <strong>Producto:</strong> {{ producto.nombre }} <br>
+    <strong>Existencias Actuales:</strong> {{ producto.existencias }}
+  </div>
+
+  <form [formGroup]="ajusteForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="cantidad">Cantidad a Ajustar</label>
+      <input id="cantidad" type="number" formControlName="cantidad" placeholder="Ej: -5 (para restar) o 10 (para sumar)">
+    </div>
+    <div class="form-group">
+      <label for="razon">Razón del Ajuste</label>
+      <input id="razon" formControlName="razon" placeholder="Ej: Venta, Merma, Conteo inicial">
+    </div>
+    <div class="form-actions">
+      <button type="submit" [disabled]="!ajusteForm.valid">Guardar Ajuste</button>
+      <a routerLink="/productos" class="btn-cancelar">Cancelar</a>
+    </div>
+  </form>
+</div>

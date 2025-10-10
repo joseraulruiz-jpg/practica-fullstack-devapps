@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 export interface ApiResponse {
   content: any[];
+  totalPages: number; 
+  number: number; 
 }
 
 @Injectable({
@@ -14,9 +16,9 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
-  getProductos(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.apiUrl);
-  }
+    getProductos(page: number, size: number): Observable<ApiResponse> {
+      return this.http.get<ApiResponse>(`${this.apiUrl}?page=${page}&size=${size}&sort=id,asc`);
+    }
 
   // --- MÉTODOS PARA EL FORMULARIO ---
 
@@ -35,5 +37,11 @@ export class ProductoService {
   // Activar o desactivar un producto
   toggleActivo(id: number): Observable<any> {
     return this.http.patch(`${this.apiUrl}/${id}/activar`, {});
+  }
+
+  // Nuevo método para ajustar el inventario
+  ajustarInventario(id: number, cantidad: number, razon: string): Observable<any> {
+    const body = { cantidad, razon }; // Creamos el cuerpo del JSON que espera el backend
+    return this.http.post(`${this.apiUrl}/${id}/ajustar`, body);
   }
 }
