@@ -18,14 +18,21 @@
     <tbody>
       <tr *ngFor="let producto of productos">
         <td>{{ producto.id }}</td>
-        <td>{{ producto.nombre }}</td>
+        <td>
+          <a [routerLink]="['/productos/detalle', producto.id]">{{ producto.nombre }}</a>
+        </td>
         <td>{{ producto.marca }}</td>
         <td>{{ producto.precio | currency:'MXN' }}</td>
         <td>{{ producto.existencias }}</td>
-        <td>{{ producto.activo ? 'Sí' : 'No' }}</td>
+        <td>
+          <i *ngIf="producto.activo" class="fas fa-check" style="color: limegreen;" title="Activo"></i>
+          <i *ngIf="!producto.activo" class="fas fa-xmark" style="color: red;" title="Inactivo"></i>
+        </td>
         <td>{{ producto.ultimaRazonAjuste || 'N/A' }}</td>
         <td>
-          <a [routerLink]="['/productos/editar', producto.id]" class="btn-editar">Editar</a>
+          <a [routerLink]="['/productos/editar', producto.id]" class="btn-editar" title="Editar">
+            <i class="fa-solid fa-file-pen"></i>
+          </a>
         </td>
       </tr>
     </tbody>

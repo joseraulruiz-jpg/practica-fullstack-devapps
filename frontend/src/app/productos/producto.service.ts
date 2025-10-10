@@ -31,4 +31,9 @@ export class ProductoService {
   actualizarProducto(id: number, producto: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, producto);
   }
+
+  // Activar o desactivar un producto
+  toggleActivo(id: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${id}/activar`, {});
+  }
 }

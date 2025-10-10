@@ -5,10 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductosRoutingModule } from './productos-routing.module';
 import { ListaProductosComponent } from './lista-productos/lista-productos.component';
 import { ProductoFormComponent } from './producto-form/producto-form.component';
+import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
 
 
 @NgModule({
-  declarations: [ListaProductosComponent, ProductoFormComponent],
+  declarations: [ListaProductosComponent, ProductoFormComponent, ProductoDetalleComponent],
   imports: [
     CommonModule,
     ProductosRoutingModule,

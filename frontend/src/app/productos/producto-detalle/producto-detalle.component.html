@@ -1,0 +1,25 @@
+<div class="detalle-container" *ngIf="producto">
+  <h2>Detalle del Producto</h2>
+
+  <div class="detalle-info">
+    <p><strong>ID:</strong> {{ producto.id }}</p>
+    <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+    <p><strong>Marca:</strong> {{ producto.marca }}</p>
+    <p><strong>Categoría:</strong> {{ producto.categoria }}</p>
+    <p><strong>Precio:</strong> {{ producto.precio | currency:'MXN' }}</p>
+    <p><strong>Existencias:</strong> {{ producto.existencias }}</p>
+    <p><strong>Estado:</strong> {{ producto.activo ? 'Activo' : 'Inactivo' }}</p>
+    <p><strong>Última Razón de Ajuste:</strong> {{ producto.ultimaRazonAjuste || 'N/A' }}</p>
+  </div>
+
+  <div class="acciones">
+    <button (click)="onToggleActivo()">
+      {{ producto.activo ? 'Desactivar' : 'Activar' }}
+    </button>
+    <button (click)="regresar()">Regresar a la Lista</button>
+  </div>
+</div>
+
+<div *ngIf="!producto">
+  <p>Cargando datos del producto...</p>
+</div>
