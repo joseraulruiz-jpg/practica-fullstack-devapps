@@ -2,10 +2,14 @@
   <h1>Lista de Productos</h1>
 
   <div class="toolbar">
-    <a routerLink="/productos/nuevo" class="btn-nuevo">Nuevo Producto</a>
+    <a routerLink="/productos/nuevo" class="btn-nuevo">Nuevo Producto
+      <i class="fa-solid fa-plus"></i>
+    </a>
     <div class="search-form">
       <input type="text" [(ngModel)]="filtro" (keyup.enter)="buscar()" placeholder="Buscar por nombre o marca...">
-      <button (click)="buscar()">Buscar</button>
+      <button (click)="buscar()">
+        <i class="fas fa-search"></i>
+      </button>
     </div>
   </div>
 
@@ -52,11 +56,11 @@
 
   <div class="pagination-controls">
     <button (click)="paginaAnterior()" [disabled]="currentPage === 0">
-      Anterior
+      <
     </button>
     <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
     <button (click)="paginaSiguiente()" [disabled]="currentPage >= totalPages - 1">
-      Siguiente
+      >
     </button>
   </div>
 </div>
