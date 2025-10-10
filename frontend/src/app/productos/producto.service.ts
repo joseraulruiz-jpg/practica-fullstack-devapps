@@ -16,8 +16,12 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
-    getProductos(page: number, size: number): Observable<ApiResponse> {
-      return this.http.get<ApiResponse>(`${this.apiUrl}?page=${page}&size=${size}&sort=id,asc`);
+    getProductos(page: number, size: number, filtro: string): Observable<ApiResponse> {
+      let url = `${this.apiUrl}?page=${page}&size=${size}&sort=id,asc`;
+      if (filtro) {
+        url += `&filtro=${filtro}`;
+      }
+      return this.http.get<ApiResponse>(url);
     }
 
   // --- MÉTODOS PARA EL FORMULARIO ---
@@ -44,4 +48,5 @@ export class ProductoService {
     const body = { cantidad, razon }; // Creamos el cuerpo del JSON que espera el backend
     return this.http.post(`${this.apiUrl}/${id}/ajustar`, body);
   }
+
 }

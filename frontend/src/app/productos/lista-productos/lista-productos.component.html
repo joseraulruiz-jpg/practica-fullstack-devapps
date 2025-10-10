@@ -1,7 +1,13 @@
 <div class="container">
   <h1>Lista de Productos</h1>
 
-  <a routerLink="/productos/nuevo" class="btn-nuevo">Nuevo Producto</a>
+  <div class="toolbar">
+    <a routerLink="/productos/nuevo" class="btn-nuevo">Nuevo Producto</a>
+    <div class="search-form">
+      <input type="text" [(ngModel)]="filtro" (keyup.enter)="buscar()" placeholder="Buscar por nombre o marca...">
+      <button (click)="buscar()">Buscar</button>
+    </div>
+  </div>
 
   <table>
     <thead>
@@ -13,41 +19,37 @@
         <th>Existencias</th>
         <th>Activo</th>
         <th>Última Razón</th>
-        <td>
-          <a [routerLink]="['/productos/editar', producto?.id]" class="btn-editar" title="Editar">
-            <i class="fas fa-pen-to-square"></i>
-          </a>
-
-          <a [routerLink]="['/productos/ajustar', producto?.id]" class="btn-ajustar" title="Ajustar Inventario">
-            <i class="fas fa-boxes-stacked"></i>
-          </a>
-        </td> 
-      </tr>
+        <th>Acciones</th> </tr>
     </thead>
     <tbody>
       <tr *ngFor="let producto of productos">
         <td>{{ producto.id }}</td>
         <td>
-          <a [routerLink]="['/productos/detalle', producto?.id]">{{ producto.nombre }}</a>
+          <a [routerLink]="['/productos/detalle', producto.id]">{{ producto.nombre }}</a>
         </td>
         <td>{{ producto.marca }}</td>
         <td>{{ producto.precio | currency:'MXN' }}</td>
         <td>{{ producto.existencias }}</td>
         <td>
-          <button class="btn-icon" (click)="onToggleActivo(producto?.id)">
-            <i *ngIf="producto?.activo" class="fas fa-check" style="color: limegreen;" title="Desactivar"></i>
-            <i *ngIf="!producto?.activo" class="fas fa-xmark" style="color: red;" title="Activar"></i>
+          <button class="btn-icon" (click)="onToggleActivo(producto.id)">
+            <i *ngIf="producto.activo" class="fas fa-check" style="color: limegreen;" title="Desactivar"></i>
+            <i *ngIf="!producto.activo" class="fas fa-xmark" style="color: red;" title="Activar"></i>
           </button>
         </td>
         <td>{{ producto.ultimaRazonAjuste || 'N/A' }}</td>
+        
         <td>
-          <a [routerLink]="['/productos/editar', producto?.id]" class="btn-editar" title="Editar">
-            <i class="fa-solid fa-file-pen"></i>
+          <a [routerLink]="['/productos/editar', producto.id]" class="btn-editar" title="Editar">
+            <i class="fas fa-pen-to-square"></i>
+          </a>
+          <a [routerLink]="['/productos/ajustar', producto.id]" class="btn-ajustar" title="Ajustar Inventario">
+            <i class="fas fa-boxes-stacked"></i>
           </a>
         </td>
       </tr>
     </tbody>
   </table>
+
   <div class="pagination-controls">
     <button (click)="paginaAnterior()" [disabled]="currentPage === 0">
       Anterior

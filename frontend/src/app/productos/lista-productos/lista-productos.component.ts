@@ -12,6 +12,7 @@ export class ListaProductosComponent implements OnInit {
   currentPage = 0;
   totalPages = 0;
   pageSize = 5; // Puedes cambiar cuántos productos quieres por página
+  filtro = '';
 
   constructor(private productoService: ProductoService) { }
 
@@ -19,10 +20,20 @@ export class ListaProductosComponent implements OnInit {
     this.cargarProductos();
   }
 
+  onToggleActivo(id: number): void {
+  this.productoService.toggleActivo(id).subscribe(productoActualizado => {
+    const index = this.productos.findIndex(p => p.id === id);
+    if (index !== -1) {
+      this.productos[index] = productoActualizado;
+    }
+  });
+}
+
   cargarProductos(): void {
-    this.productoService.getProductos(this.currentPage, this.pageSize).subscribe(data => {
-      this.productos = data.content;
-      this.totalPages = data.totalPages;
+    this.productoService.getProductos(this.currentPage, this.pageSize, this.filtro) 
+      .subscribe((data: ApiResponse) => {
+        this.productos = data.content;
+        this.totalPages = data.totalPages;
     });
   }
 
@@ -33,6 +44,11 @@ export class ListaProductosComponent implements OnInit {
 
   paginaAnterior(): void {
     this.currentPage--;
+    this.cargarProductos();
+  }
+
+  buscar(): void {
+    this.currentPage = 0; // Reinicia a la primera página con cada nueva búsqueda
     this.cargarProductos();
   }
 }

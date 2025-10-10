@@ -1,0 +1,8 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #121212; /* Fondo oscuro global */
+    color: #e0e0e0; /* Texto claro global */
+    font-family: sans-serif;
+}
