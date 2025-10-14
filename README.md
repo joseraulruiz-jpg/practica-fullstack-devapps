@@ -20,7 +20,7 @@ Cada carpeta tiene su propio `README.md` con instrucciones detalladas para su co
 Además del código, en la raíz de este repositorio se encuentran los siguientes entregables:
 
 - **[DEVAPPS_Prueba.postman_collection.json](./DEVAPPS_Prueba.postman_collection.json):** La colección de Postman utilizada para probar la API, completamente documentada.
-- **[REPORTES_CALIDAD.md](./REPORTES_CALIDAD.md):** Un resumen de los reportes generados por SonarLint y Checkstyle para el proyecto de backend.
+- **[REPORTES_CALIDAD.md](./backend/REPORTES_CALIDAD.md):** Un resumen de los reportes generados por SonarLint y Checkstyle para el proyecto de backend.
 - **[REGISTRO_DEBUG.md](./REGISTRO_DEBUG.md):** Documentación de 3 errores encontrados durante el desarrollo y sus respectivas soluciones.
 ## 🏁 Cómo Empezar
 
