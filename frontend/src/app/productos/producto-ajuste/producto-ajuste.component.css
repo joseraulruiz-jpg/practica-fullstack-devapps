@@ -1,0 +1,93 @@
+.form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    border: 1px solid #333;
+    color: #e0e0e0;
+}
+
+.product-info {
+    background-color: #2c2c2c;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #c0c0c0;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #fff;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem; /* Espacio entre los botones */
+    margin-top: 1.5rem;
+}
+
+.form-actions > * {
+    flex: 1; /* Hace que ambos botones ocupen el mismo espacio */
+}
+
+button, .btn-cancelar {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #004a99;
+    cursor: not-allowed;
+}
+
+.btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+    border: 1px solid #6c757d;
+}
+
+.btn-cancelar:hover {
+    background-color: #5a6268;
+}

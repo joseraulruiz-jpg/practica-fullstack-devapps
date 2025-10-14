@@ -8,10 +8,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 import java.util.Optional;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/productos")
 public class ProductoController {
@@ -22,12 +25,13 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    // --- Endpoints Requeridos por la Práctica ---
 
     // 1. GET /productos – listar con paginación
     @GetMapping
-    public Page<Producto> listarProductos(Pageable pageable) {
-        return productoService.listarProductos(pageable);
+    public Page<Producto> listarProductos(
+            @RequestParam(required = false) String filtro, // <-- Añade este parámetro
+            Pageable pageable) {
+        return productoService.listarProductos(filtro, pageable);
     }
 
     // 2. POST /productos – crear
@@ -84,6 +88,5 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
 }

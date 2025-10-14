@@ -57,7 +57,7 @@ public class ProductoService {
         }).orElseThrow(() -> new RuntimeException("Producto no encontrado con el id: " + id));
     }
 
-    // Nuevo método para activar o desactivar un producto
+    // Método para activar o desactivar un producto
     @Transactional
     public Producto activarDesactivarProducto(Long id) {
         Producto producto = productoRepository.findById(id)
@@ -66,7 +66,7 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    // Nuevo método para ajustar el inventario
+    // Método para ajustar el inventario
     @Transactional
     public Producto ajustarInventario(Long id, int cantidad, String razon) {
         Producto producto = productoRepository.findById(id)
@@ -91,20 +91,14 @@ public class ProductoService {
         }
     }
 
-    /*
-    @Transactional
-    public Producto ajustarInventario(Long id, int cantidad, String razon) { // <--- Añadir String razon
-        System.out.println("Ajustando inventario para producto ID " + id + ". Cantidad: " + cantidad + ", Razón: " + razon);
-
-        Producto producto = productoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado con el id: " + id));
-
-        int nuevasExistencias = producto.getExistencias() + cantidad;
-        if (nuevasExistencias < 0) {
-            throw new IllegalArgumentException("No se puede ajustar el inventario a un valor negativo.");
+    @Transactional(readOnly = true)
+    public Page<Producto> listarProductos(String filtro, Pageable pageable) { // <-- Añade el parámetro 'filtro'
+        if (filtro != null && !filtro.trim().isEmpty()) {
+            // Si hay un filtro, busca por nombre o marca
+            return productoRepository.findByNombreContainingIgnoreCaseOrMarcaContainingIgnoreCase(filtro, filtro, pageable);
         }
-        producto.setExistencias(nuevasExistencias);
-        return productoRepository.save(producto);
+        // Si no hay filtro, devuelve todos
+        return productoRepository.findAll(pageable);
     }
-    */
+
 }
