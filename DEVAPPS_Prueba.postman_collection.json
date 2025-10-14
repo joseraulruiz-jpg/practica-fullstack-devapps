@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "3ca0dc99-e6cb-4dbd-b848-621922f4d06c",
+		"name": "preubas DevApss",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46324869"
+	},
+	"item": [
+		{
+			"name": "Actualizar Producto",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Laptop Gamer Pro\",\r\n    \"marca\": \"Razer\",\r\n    \"categoria\": \"Computadoras\",\r\n    \"precio\": 26500.0,\r\n    \"existencias\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/productos/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"productos",
+						"1"
+					]
+				},
+				"description": "**Endpoint:** `PUT /productos/{id}`\n\n**Descripción:**  \nActualiza la información completa de un producto existente, identificado por su ID.\n\n**Parámetros de URL:**\n\n- `id`: El ID del producto que se va a actualizar.\n    \n\n**Cuerpo de la Petición:**  \nUn objeto JSON con todos los campos del producto a modificar.\n\n\\`\\`\\`json  \n{  \n\"nombre\": \"Nuevo Nombre\",  \n\"marca\": \"Nueva Marca\",  \n\"categoria\": \"Nueva Categoría\",  \n\"precio\": 150.0,  \n\"existencias\": 20  \n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Activar o Desactivar Producto",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/productos/1/activar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos",
+						"1",
+						"activar"
+					]
+				},
+				"description": "**Endpoint:** `PATCH /productos/{id}/activar`\n\n**Descripción:**  \nCambia el estado `activo` de un producto. Si está activo, lo desactiva, y viceversa.\n\n**Parámetros de URL:**\n\n- `id`: El ID del producto a modificar.\n    \n\n**Cuerpo de la Petición:**  \nNinguno.\n\n**Respuesta Exitosa (200 OK):**  \nDevuelve el objeto del producto actualizado, mostrando su nuevo estado en el campo `activo`."
+			},
+			"response": []
+		},
+		{
+			"name": "Ajustar Inventario",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cantidad\": 5,\r\n    \"razon\": \"Conteo de stock inicial\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/productos/2/ajustar",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"productos",
+						"2",
+						"ajustar"
+					]
+				},
+				"description": "**Endpoint:** `POST /productos/{id}/ajustar`\n\n**Descripción:**  \nAjusta las existencias de un producto, sumando o restando una cantidad, y registra la razón del ajuste.\n\n**Parámetros de URL:**\n\n- `id`: El ID del producto a modificar.\n    \n\n**Cuerpo de la Petición:**  \nUn objeto JSON con la cantidad a ajustar (puede ser positiva o negativa) y una razón.\n\n\\`\\`\\`json  \n{  \n\"cantidad\": -5,  \n\"razon\": \"Venta de mostrador\"  \n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Teclado Mecánico RGB\",\r\n    \"marca\": \"Corsair\",\r\n    \"categoria\": \"Periféricos\",\r\n    \"precio\": 3500.0,\r\n    \"existencias\": 25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/productos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"productos"
+					]
+				},
+				"description": "**Endpoint:** `POST /productos`\n\n**Descripción:**  \nCrea un nuevo producto en la base de datos. El sistema asignará un ID automáticamente y lo establecerá como `activo`.\n\n**Cuerpo de la Petición (Body):**  \nSe debe enviar un objeto JSON con los siguientes campos:\n\n- `nombre` (String, obligatorio, único)\n    \n- `marca` (String)\n    \n- `categoria` (String)\n    \n- `precio` (Double, obligatorio, > 0)\n    \n- `existencias` (Integer, obligatorio, >= 0)\n    \n\n**Respuesta Exitosa (201 Created):**  \nDevuelve el objeto del producto recién creado, incluyendo su `id` y el campo `activo` como `true`."
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Productos (Paginado)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "**Endpoint:** `GET /productos`\n\n**Descripción:**  \nObtiene una lista paginada de todos los productos.\n\n**Parámetros de URL (Query Params):**\n\n- `page`: El número de página a solicitar (comienza en `0`).\n    \n- `size`: La cantidad de productos por página.\n    \n- `sort`: El campo por el cual ordenar, seguido de la dirección (ej: `nombre,asc` o `precio,desc`).\n    \n\n**Ejemplo de URL:** `{{baseUrl}}/productos?page=0&size=5&sort=nombre,asc`\n\n**Respuesta Exitosa (200 OK):**  \nDevuelve un objeto de paginación que contiene la lista de productos en el campo `content`, así como información sobre el total de páginas y elementos."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Producto por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "**Endpoint:** `GET /productos/{id}`\n\n**Descripción:**  \nObtiene los detalles de un único producto, identificado por su ID.\n\n**Parámetros de URL (Path Variable):**\n\n- `id`: El ID numérico del producto a consultar.\n    \n\n**Respuesta Exitosa (200 OK):**  \nDevuelve el objeto JSON completo del producto solicitado.\n\n**Respuesta de Error (404 Not Found):**  \nSe devuelve si no existe ningún producto con el ID especificado."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		}
+	]
+}
